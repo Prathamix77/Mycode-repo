@@ -308,8 +308,6 @@
 //   );
 // }
 
-
-
 // "use client";
 
 // import type React from "react";
@@ -461,13 +459,6 @@
 //   );
 // }
 
-
-
-
-
-
-
-
 // /////////////////////////////////////////
 
 "use client";
@@ -487,10 +478,10 @@ const validUsers = {
     college: "University Of Lucknow Second Campus",
     startDate: "2025-08-09T18:30:00.000Z",
     duration: "1 Month",
-    offerLetterUrl :"www.youtube.com",
-    certifcateUrl: "nothing"
+    offerLetterUrl: "nothing",
+    certifcateUrl: "nothing",
   },
-  "shivamtiwari007700@gmail.com" : {
+  "shivamtiwari007700@gmail.com": {
     name: "Shivam Tiwari",
     email: "shivamtiwari007700@gmail.com",
     mobile: "9161646919",
@@ -498,9 +489,22 @@ const validUsers = {
     college: "University Of Lucknow Second Campus",
     startDate: "2025-08-10T18:30:00.000Z",
     duration: "1 Month",
-    offerLetterUrl :"https://drive.google.com/file/d/1YrgWne_f3va3hogWFZ7-OrswtqKOOJdl/view?usp=sharing",
-    certifcateUrl: "nothing"
-  }
+    offerLetterUrl:
+      "https://drive.google.com/file/d/1YrgWne_f3va3hogWFZ7-OrswtqKOOJdl/view?usp=sharing",
+    certifcateUrl: "nothing",
+  },
+  "pratapsingh202004@gmail.com": {
+    name: "Pratap Singh",
+    email: "pratapsingh202004@gmail.com",
+    mobile: "7318214780",
+    domain: "Web Development",
+    college: "University Of Lucknow Second Campus",
+    startDate: "2025-08-10T18:30:00.000Z",
+    duration: "1 Month",
+    offerLetterUrl:
+      "https://drive.google.com/file/d/1YrgWne_f3va3hogWFZ7-OrswtqKOOJdl/view?usp=sharing",
+    certifcateUrl: "nothing",
+  },
 };
 
 export default function VerifyPage() {
@@ -608,9 +612,7 @@ export default function VerifyPage() {
 
             {/* User Info */}
             <div className="space-y-2 text-sm sm:text-base">
-              <h2 className="text-lg sm:text-xl font-bold">
-                {userData.name}
-              </h2>
+              <h2 className="text-lg sm:text-xl font-bold">{userData.name}</h2>
               <p>Email: {userData.email}</p>
               <p>Mobile: {userData.mobile}</p>
               <p>Domain: {userData.domain}</p>
@@ -618,7 +620,7 @@ export default function VerifyPage() {
               <p>Start Date: {userData.startDate}</p>
               <p>Duration: {userData.duration}</p>
             </div>
-            <div> 
+            <div>
               <a
                 href={userData.offerLetterUrl}
                 target="_blank"
@@ -632,7 +634,10 @@ export default function VerifyPage() {
               <h3 className="font-bold mb-3">Assignment Status</h3>
               <div className="flex flex-wrap gap-5 text-sm ml-4">
                 {["A1:", "A2:", "A3:", "A4:"].map((a) => (
-                  <div key={a} className="flex items-center gap-2 bg-[#EAEAEA] rounded-md px-2 py-2 mt-4 ">
+                  <div
+                    key={a}
+                    className="flex items-center gap-2 bg-[#EAEAEA] rounded-md px-2 py-2 mt-4 "
+                  >
                     <span>{a}</span>
                     <span className="w-5 h-5 bg-[#58D58D] text-white rounded flex items-center justify-center text-xs">
                       ✓
@@ -645,7 +650,6 @@ export default function VerifyPage() {
 
             {/* Links */}
             <div className="mt-4 space-y-2">
-
               <a
                 href={userData.certifcateUrl}
                 target="_blank"
@@ -654,11 +658,7 @@ export default function VerifyPage() {
                 View Certificate
               </a>
             </div>
-            <div>
-              Remarks : N/A
-            </div>
-
-            
+            <div>Remarks : N/A</div>
 
             {/* Performance Metrics */}
             <div className="mt-8 flex ml-45 gap-10 justify-items-center">
