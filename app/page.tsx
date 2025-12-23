@@ -487,6 +487,8 @@ const validUsers = {
     college: "University Of Lucknow Second Campus",
     startDate: "2025-08-09T18:30:00.000Z",
     duration: "1 Month",
+    offerLetterUrl :"www.youtube.com",
+    certifcateUrl: "nothing"
   },
   "shivamtiwari007700@gmail.com" : {
     name: "Shivam Tiwari",
@@ -496,7 +498,8 @@ const validUsers = {
     college: "University Of Lucknow Second Campus",
     startDate: "2025-08-10T18:30:00.000Z",
     duration: "1 Month",
-    
+    offerLetterUrl :"https://drive.google.com/file/d/1YrgWne_f3va3hogWFZ7-OrswtqKOOJdl/view?usp=sharing",
+    certifcateUrl: "nothing"
   }
 };
 
@@ -615,9 +618,9 @@ export default function VerifyPage() {
               <p>Start Date: {userData.startDate}</p>
               <p>Duration: {userData.duration}</p>
             </div>
-            <div>
+            <div> 
               <a
-                href="https://drive.google.com/file/d/1YrgWne_f3va3hogWFZ7-OrswtqKOOJdl/view?usp=sharing"
+                href={userData.offerLetterUrl}
                 target="_blank"
                 className="text-blue-600 hover:underline block mt-3 font-normal"
               >
@@ -644,7 +647,7 @@ export default function VerifyPage() {
             <div className="mt-4 space-y-2">
 
               <a
-                href="/pdfs/CERTIFICATE.pdf"
+                href={userData.certifcateUrl}
                 target="_blank"
                 className="text-blue-600 hover:underline block"
               >
