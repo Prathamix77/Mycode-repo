@@ -554,7 +554,7 @@ export default function VerifyPage() {
               alt="VaultofCodes Logo"
               width={160}
               height={50}
-              className="h-10 w-auto brightness-100 dark:brightness-100"
+              className="h-10 w-auto block invert-0 brightness-100 dark:invert-0 dark:brightness-100"
             />
             <h1 className="text-[22px] sm:text-[25px] font-bold text-[#2C3E50] whitespace-nowrap">
               VaultofCodes
