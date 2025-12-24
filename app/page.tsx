@@ -548,7 +548,7 @@ export default function VerifyPage() {
       {/* ================= Header ================= */}
       <header className="bg-white h-28 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 h-full">
-          <div className="flex items-center justify-center gap-3 h-full">
+          <div className="flex items-center justify-center gap-3 h-full invert-0 brightness-100 dark:invert-0 dark:brightness-100">
             <Image
               src="/vaultofcodes-logo.png"
               alt="VaultofCodes Logo"
