@@ -473,13 +473,15 @@ const validUsers = {
   "prathamdixit7777@gmail.com": {
     name: "Pratham Dixit",
     email: "prathamdixit7777@gmail.com",
-    mobile: "8317005505",
+    mobile: "8317009505",
     domain: "Python Programming",
     college: "University Of Lucknow Second Campus",
     startDate: "2025-08-09T18:30:00.000Z",
     duration: "1 Month",
-    offerLetterUrl: "nothing",
-    certifcateUrl: "nothing",
+    offerLetterUrl:
+      "https://drive.google.com/file/d/18T2inOdWLY966uQIoq8oyJ-k5Z0liLyN/view?usp=drive_link",
+    certifcateUrl:
+      "https://drive.google.com/file/d/1tjkIXS_lC9YIXklaZFbb_wWv17LOYYuo/view?usp=drive_link",
   },
   "shivamtiwari007700@gmail.com": {
     name: "Shivam Tiwari",
@@ -490,11 +492,12 @@ const validUsers = {
     startDate: "2025-08-10T18:30:00.000Z",
     duration: "1 Month",
     offerLetterUrl:
-      "https://drive.google.com/file/d/1YrgWne_f3va3hogWFZ7-OrswtqKOOJdl/view?usp=sharing",
-    certifcateUrl: "nothing",
+      "https://drive.google.com/file/d/1gppImsg68aw4R44s70h02eT_3PnQHf0X/view?usp=drive_link",
+    certifcateUrl:
+      "https://drive.google.com/file/d/15xwDD_NEhpJ649_hPQKXwWkDY9KoDfEk/view?usp=drive_link",
   },
   "pratapsingh202004@gmail.com": {
-    name: "Pratap Singh",
+    name: "Pratap Kumar Singh",
     email: "pratapsingh202004@gmail.com",
     mobile: "7318214780",
     domain: "Web Development",
@@ -502,21 +505,58 @@ const validUsers = {
     startDate: "2025-08-10T18:30:00.000Z",
     duration: "1 Month",
     offerLetterUrl:
-      "https://drive.google.com/file/d/1YrgWne_f3va3hogWFZ7-OrswtqKOOJdl/view?usp=sharing",
-    certifcateUrl: "nothing",
+      "https://drive.google.com/file/d/11pLi9llurKXYAJZlzZDKTLZIwObLhBk5/view?usp=drive_link",
+    certifcateUrl:
+      "https://drive.google.com/file/d/1vYwQ4Jw5A7CoE3sKoMf-VbkykTy3-ALr/view?usp=drive_link",
   },
 };
+// ✅ PUT THIS AT THE TOP OF THE FILE (above VerifyPage)
+
+  function Toast({
+  show,
+  message,
+  }: {
+  show: boolean;
+  message: string;
+}) {
+  if (!show) return null;
+
+  return (
+    <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50">
+      <div className="flex items-center gap-1 bg-[#333333] text-white px-5 py-3 rounded-sm shadow-md text-sm whitespace-nowrap max-w-sm backdrop-opacity-55 font-normal">
+        <span className="text-green-500">✅</span>
+        <span>{message}</span>
+      </div>
+    </div>
+  );
+}
 
 export default function VerifyPage() {
   const [email, setEmail] = useState("");
   const [isVerified, setIsVerified] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const [userData, setUserData] = useState<
     (typeof validUsers)[keyof typeof validUsers] | null
   >(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  /* ------------------ Submit Handler ------------------ */
+  /* ------------------ Toast ------------------ */
+  const showSuccessToast = () => {
+  setShowToast(true);
+
+  setTimeout(() => {
+    setShowToast(false);
+  },4000); // auto hide in 3 seconds
+};
+
+    /* ------------------ Submit Handler ------------------ */
+  const handleRetry = () => {
+    setError("");
+    setEmail("");
+    setLoading(false); // ⬅️ CRITICAL
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -537,8 +577,11 @@ export default function VerifyPage() {
       if (user) {
         setUserData(user);
         setIsVerified(true);
+        setUserData(user);
+        setLoading(false);
+        showSuccessToast();
       } else {
-        setError("No record found with this ID");
+        setError("No records found for the provided ID.");
       }
     }, 10000);
   };
@@ -556,7 +599,7 @@ export default function VerifyPage() {
               height={50}
               className="h-10 w-auto block invert-0 brightness-100 dark:invert-0 dark:brightness-100"
             />
-            <h1 className="text-[22px] sm:text-[25px] font-bold text-[#2C3E50] whitespace-nowrap">
+            <h1 className="text-[25px] sm:text-[25px] font-sans font-[730] text-[#2C3E50] text-center sm:text-left leading-none">
               VaultofCodes
             </h1>
           </div>
@@ -566,7 +609,7 @@ export default function VerifyPage() {
       {/* ================= Main ================= */}
       <main className="max-w-4xl mx-auto px-4 py-6">
         {/* Verification Card */}
-        <div className="bg-white rounded-lg shadow p-6 sm:p-8">
+        {/* <div className="bg-white rounded-lg shadow p-6 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
@@ -588,7 +631,41 @@ export default function VerifyPage() {
               <p className="text-red-600 text-center font-medium">{error}</p>
             )}
           </form>
+        </div> */}
+        <div className="bg-white rounded-lg shadow p-6 sm:p-8">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              placeholder="Enter your Email or ID"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-black"
+            />
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#007BFF] hover:bg-blue-700 text-white py-2 rounded-md disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {loading ? "Verify" : "Verify"}
+            </button>
+          </form>
         </div>
+
+        {/* Error Box */}
+        {error && !loading && (
+          <div className="mt-10 mx-auto max-w-lg max-sm:min-w-85 border border-red-500 bg-[#FFECEC] rounded-sm px-3 py-2 text-center text-[15px] ">
+            <p className="text-red-700 font-light mb-3">{error}</p>
+
+            <button
+              type="button"
+              onClick={handleRetry}
+              className="w-full mt-4 max-sm:h-9 bg-[#ce030d] hover:bg-red-700 py-1 text-white  rounded-sm font-normal"
+            >
+              Retry
+            </button>
+          </div>
+        )}
 
         {/* ================= Loader ================= */}
         {loading && (
@@ -605,7 +682,14 @@ export default function VerifyPage() {
           <div className="bg-white rounded-lg shadow p-6 sm:p-8 mt-6">
             {/* Photo */}
             <div className="flex justify-center mb-6">
-              <div className="w-20 h-4 bg-white outline-gray-600 shadow-2xl  flex items-center justify-center text-gray-500">
+              <div className="w-27 h-4 bg-white outline-black  ring-black rounded-sm flex items-center justify-start text-black border-b border-gray-200 border-r">
+                <img
+
+                  src="capture-jpg.jpg"
+                  className="object-cover"
+                  width={13}
+                  height={11}
+                ></img>
                 Photo
               </div>
             </div>
@@ -624,7 +708,7 @@ export default function VerifyPage() {
               <a
                 href={userData.offerLetterUrl}
                 target="_blank"
-                className="text-blue-600 hover:underline block mt-3 font-normal"
+                className="text-[#007BFF] max-sm:font-semibold hover:underline block mt-3"
               >
                 View Offer Letter
               </a>
@@ -632,44 +716,248 @@ export default function VerifyPage() {
             {/* Assignment Status */}
             <div className=" mb-4">
               <h3 className="font-bold mb-3">Assignment Status</h3>
-              <div className="flex flex-wrap gap-5 text-sm ml-4">
+              <div className="flex flex-nowrap gap-3 text-sm">
                 {["A1:", "A2:", "A3:", "A4:"].map((a) => (
                   <div
                     key={a}
-                    className="flex items-center gap-2 bg-[#EAEAEA] rounded-md px-2 py-2 mt-4 "
+                    className=" flex-nowrap items-center bg-[#EAEAEA] rounded-sm px-2 py-1 mt-4 "
                   >
                     <span>{a}</span>
-                    <span className="w-5 h-5 bg-[#58D58D] text-white rounded flex items-center justify-center text-xs">
-                      ✓
+                    <span className="w-5 h-5 text-white rounded items-center justify-center text-sm">
+                      ✅
                     </span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="mt-2">Status:Completed</div>
+            <div className="">Status:Completed</div>
 
             {/* Links */}
             <div className="mt-4 space-y-2">
               <a
                 href={userData.certifcateUrl}
                 target="_blank"
-                className="text-blue-600 hover:underline block"
+                className="text-[#007BFF] hover:underline block max-sm:font-semibold"
               >
                 View Certificate
               </a>
             </div>
-            <div>Remarks : N/A</div>
+            <div className="font-normal">Remarks : N/A</div>
 
             {/* Performance Metrics */}
-            <div className="mt-8 flex ml-45 gap-10 justify-items-center">
+            <div className="mt-8 flex flex-wrap ml-13 max-md:20 gap-x-4 gap-y-8 justify-items-center-start">
               <ProgressCircle label="Attendance" value={95} size={80} />
               <ProgressCircle label="Tools" value={95} size={80} />
-              <ProgressCircle label="Communication" value={90} size={100} />
+              <ProgressCircle label="Communication" value={90} size={105} />
               <ProgressCircle label="Performance" value={95} size={80} />
             </div>
           </div>
         )}
+        <Toast
+  show={showToast}
+  message="Certificate details loaded."
+/>
+
       </main>
     </div>
   );
 }
+
+// "use client";
+
+// import type React from "react";
+// import { useState } from "react";
+// import Image from "next/image";
+// import ProgressCircle from "@/components/ui/ProgressCircle";
+
+// /* ------------------ Mock Database ------------------ */
+// const validUsers = {
+//   "prathamdixit7777@gmail.com": {
+//     name: "Pratham Dixit",
+//     email: "prathamdixit7777@gmail.com",
+//     mobile: "8317005505",
+//     domain: "Python Programming",
+//     college: "University Of Lucknow Second Campus",
+//     startDate: "2025-08-09",
+//     duration: "1 Month",
+//     offerLetterUrl: "https://drive.google.com/file/d/18T2inOdWLY966uQIoq8oyJ-k5Z0liLyN/view?usp=drive_link",
+//     certifcateUrl: "https://drive.google.com/file/d/1-ssfLvBkrpFxmY8Ldt4n1kNWi70A1L2N/view?usp=drive_link",
+//   },
+//   "shivamtiwari007700@gmail.com": {
+//     name: "Shivam Tiwari",
+//     email: "shivamtiwari007700@gmail.com",
+//     mobile: "9161646919",
+//     domain: "Python Programming",
+//     college: "University Of Lucknow Second Campus",
+//     startDate: "2025-08-10",
+//     duration: "1 Month",
+//     offerLetterUrl:
+//       "https://drive.google.com/file/d/1gppImsg68aw4R44s70h02eT_3PnQHf0X/view?usp=drive_link",
+//     certifcateUrl: "https://drive.google.com/file/d/15xwDD_NEhpJ649_hPQKXwWkDY9KoDfEk/view?usp=drive_link",
+//   },
+//   "pratapsingh202004@gmail.com": {
+//     name: "Pratap Singh",
+//     email: "pratapsingh202004@gmail.com",
+//     mobile: "7318214780",
+//     domain: "Web Development",
+//     college: "University Of Lucknow Second Campus",
+//     startDate: "2025-08-10",
+//     duration: "1 Month",
+//     offerLetterUrl:
+//       "https://drive.google.com/file/d/11pLi9llurKXYAJZlzZDKTLZIwObLhBk5/view?usp=drive_link",
+//     certifcateUrl: "https://drive.google.com/file/d/1vYwQ4Jw5A7CoE3sKoMf-VbkykTy3-ALr/view?usp=drive_link",
+//   },
+// };
+
+// export default function VerifyPage() {
+//   const [email, setEmail] = useState("");
+//   const [isVerified, setIsVerified] = useState(false);
+//   const [userData, setUserData] = useState<
+//     (typeof validUsers)[keyof typeof validUsers] | null
+//   >(null);
+//   const [error, setError] = useState("");
+//   const [loading, setLoading] = useState(false);
+
+//   const handleSubmit = (e: React.FormEvent) => {
+//     e.preventDefault();
+//     if (!email.trim()) return;
+
+//     setError("");
+//     setIsVerified(false);
+//     setUserData(null);
+//     setLoading(true);
+
+//     setTimeout(() => {
+//       setLoading(false);
+//       const user =
+//         validUsers[email.toLowerCase().trim() as keyof typeof validUsers];
+
+//       if (user) {
+//         setUserData(user);
+//         setIsVerified(true);
+//       } else {
+//         setError("No record found with this ID");
+//       }
+//     }, 3000);
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-[#F5F5F5]">
+//       {/* ================= Header ================= */}
+//       <header className="bg-white min-h-22 border-b border-gray-200">
+//         <div className="max-w-6xl mx-auto px-4 sm:px-12 mt-5 mr-4">
+//           <div className="flex items-center justify-center sm:justify-center sm:items-center gap-1.5 py-4 ">
+//             <Image
+//               src="/vaultofcodes-logo.png"
+//               alt="VaultofCodes Logo"
+//               width={160}
+//               height={50}
+//               className="h-10 w-auto block invert-0 brightness-100 dark:invert-0 dark:brightness-100"
+//             />
+//             <h1 className="text-[25px] sm:text-[25px] font-sans font-[730] text-[#2C3E50] text-center sm:text-left leading-none">
+//               VaultofCodes
+//             </h1>
+//           </div>
+//         </div>
+//       </header>
+
+//       {/* ================= Main ================= */}
+//       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
+//         {/* Verification Card */}
+//         <div className="bg-white rounded-lg shadow p-5 sm:p-8">
+//           <form onSubmit={handleSubmit} className="space-y-4">
+//             <input
+//               type="text"
+//               placeholder="Enter your Email or ID"
+//               value={email}
+//               onChange={(e) => setEmail(e.target.value)}
+//               className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-black"
+//             />
+
+//               <button
+//               type="submit"
+//               disabled={loading}
+//               className="w-full bg-[#007BFF] hover:bg-blue-700 text-white py-2 rounded-md pointer-cursor disabled:opacity-60 disabled:cursor-not-allowed"
+//             >
+//               {loading ? "Verify" : "Verify"}
+//             </button>
+
+//             {error && (
+//               <p className="text-red-600 text-center font-medium">{error}</p>
+//             )}
+//           </form>
+//         </div>
+
+//         {/* ================= Loader ================= */}
+//         {loading && (
+//           <div className="flex justify-center mt-6">
+//             <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+//           </div>
+//         )}
+
+//         {/* ================= Profile ================= */}
+//         {isVerified && userData && (
+//           <div className="bg-white rounded-lg shadow p-5 sm:p-8 mt-6">
+//             <h2 className="text-lg sm:text-xl font-bold mb-4">
+//               {userData.name}
+//             </h2>
+
+//             <div className="space-y-2 text-sm sm:text-base">
+//               <p>Email: {userData.email}</p>
+//               <p>Mobile: {userData.mobile}</p>
+//               <p>Domain: {userData.domain}</p>
+//               <p>College: {userData.college}</p>
+//               <p>Start Date: {userData.startDate}</p>
+//               <p>Duration: {userData.duration}</p>
+//             </div>
+
+//             <a
+//               href={userData.offerLetterUrl}
+//               target="_blank"
+//               className="text-blue-600 hover:underline block mt-3"
+//             >
+//               View Offer Letter
+//             </a>
+
+//             <div className="mt-1">
+//               <h3 className="font-bold mb-3">Assignment Status</h3>
+//               <div className="flex flex-nowrap gap-2  mt-4 text-xs">
+//                 {["A1:", "A2:", "A3:", "A4:"].map((a) => (
+//                   <div
+//                     key={a}
+//                     className="flex items-center gap-1 bg-[#EAEAEA] rounded-sm px-3 py-1"
+//                   >
+//                     <span>{a}</span>
+//                     <span className="w-5 h-5 bg-[#58D58D] text-white rounded flex items-center justify-center text-xs">
+//                       ✓
+//                     </span>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+//             <div className="mt-2 font-normal">Status:Completed</div>
+
+//             {/* Links */}
+//             <div className="mt-4 space-y-2">
+//                 <a
+//                 href={userData.certifcateUrl}
+//                 target="_blank"
+//                 className="text-blue-600 hover:underline block"
+//               >
+//                 View Certificate
+//               </a>
+//             </div>
+//             <div>Remarks: N/A</div>
+
+//              <div className="mt-8 flex flex-wrap gap-13 justify-items-center">
+//                <ProgressCircle label="Attendance" value={95} size={80} />
+//                <ProgressCircle label="Tools" value={95} size={80} />
+//                <ProgressCircle label="Communication" value={95} size={110} />
+//                <ProgressCircle label="Performance" value={95} size={80} />
+//              </div>
+//            </div>
+//         )}
+//       </main>
+//     </div>
+//   );
+// }

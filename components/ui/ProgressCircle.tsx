@@ -15,7 +15,7 @@ export default function ProgressCircle({
   const offset = circumference - (value / 100) * circumference
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center gap-2 tracking-tighter">
       <svg
         width={size}
         height={size}
