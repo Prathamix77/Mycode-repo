@@ -684,11 +684,11 @@ export default function VerifyPage() {
             <div className="flex justify-center mb-6">
               <div className="w-27 h-4 bg-white outline-black  ring-black rounded-sm flex items-center justify-start text-black border-b border-gray-200 border-r">
                 <img
-
                   src="capture-jpg.jpg"
-                  className="object-cover"
+                  className="object-cover rounded-b"
                   width={13}
                   height={11}
+                  
                 ></img>
                 Photo
               </div>
@@ -745,7 +745,7 @@ export default function VerifyPage() {
             <div className="font-normal">Remarks : N/A</div>
 
             {/* Performance Metrics */}
-            <div className="mt-8 flex flex-wrap ml-13 max-md:20 gap-x-4 gap-y-8 justify-items-center-start">
+            <div className="mt-8 flex flex-wrap ml-13 max-md:20 gap-x-4 gap-y-8 justify-items-center">
               <ProgressCircle label="Attendance" value={95} size={80} />
               <ProgressCircle label="Tools" value={95} size={80} />
               <ProgressCircle label="Communication" value={90} size={105} />

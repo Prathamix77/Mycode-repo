@@ -35,7 +35,7 @@ export default function ProgressCircle({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#57b846"
+          stroke="#4EAE50"
           strokeWidth={strokeWidth}
           fill="none"
           strokeDasharray={circumference}
