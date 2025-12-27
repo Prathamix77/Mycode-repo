@@ -473,6 +473,7 @@ const validUsers = {
   "prathamdixit7777@gmail.com": {
     name: "Pratham Dixit",
     email: "prathamdixit7777@gmail.com",
+    rollNo: "2410014045057",
     mobile: "8317009505",
     domain: "Python Programming",
     college: "University Of Lucknow Second Campus",
@@ -486,6 +487,7 @@ const validUsers = {
   "shivamtiwari007700@gmail.com": {
     name: "Shivam Tiwari",
     email: "shivamtiwari007700@gmail.com",
+    rollNo: "2410014045058",
     mobile: "9161646919",
     domain: "Python Programming",
     college: "University Of Lucknow Second Campus",
@@ -499,6 +501,7 @@ const validUsers = {
   "pratapsingh202004@gmail.com": {
     name: "Pratap Kumar Singh",
     email: "pratapsingh202004@gmail.com",
+    rollNo: "2410014045032",
     mobile: "7318214780",
     domain: "Web Development",
     college: "University Of Lucknow Second Campus",
@@ -571,10 +574,16 @@ export default function VerifyPage() {
     setTimeout(() => {
       setLoading(false);
 
-      const user =
-        validUsers[email.toLowerCase().trim() as keyof typeof validUsers];
+      // const user =
+      //   validUsers[email.toLowerCase().trim() as keyof typeof validUsers];
+      const user = Object.values(validUsers).find(
+      (u) =>
+      u.email.toLowerCase() === email.toLowerCase().trim() ||
+      u.rollNo?.toLowerCase() === email.toLowerCase().trim()
+)
 
       if (user) {
+        const { rollNo, ...safeUser } = user;
         setUserData(user);
         setIsVerified(true);
         setUserData(user);
@@ -639,7 +648,7 @@ export default function VerifyPage() {
               placeholder="Enter your Email or ID"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-black"
+              className="w-full px-4 py-2 border rounded-sm focus:ring-2 focus:ring-black"
             />
 
             <button
@@ -679,7 +688,7 @@ export default function VerifyPage() {
 
         {/* ================= Profile ================= */}
         {isVerified && userData && (
-          <div className="bg-white rounded-lg shadow p-6 sm:p-8 mt-6">
+          <div className="bg-white rounded-md shadow p-6 sm:p-8 mt-10 md:ml-13">
             {/* Photo */}
             <div className="flex justify-center mb-6">
               <div className="w-27 h-4 bg-white outline-black  ring-black rounded-sm flex items-center justify-start text-black border-b border-gray-200 border-r">
@@ -696,7 +705,7 @@ export default function VerifyPage() {
 
             {/* User Info */}
             <div className="space-y-2 text-sm sm:text-base">
-              <h2 className="text-lg sm:text-xl font-bold">{userData.name}</h2>
+              <h2 className="text-lg sm:text-xl font-bold mb-6">{userData.name}</h2>
               <p>Email: {userData.email}</p>
               <p>Mobile: {userData.mobile}</p>
               <p>Domain: {userData.domain}</p>
@@ -745,7 +754,7 @@ export default function VerifyPage() {
             <div className="font-normal">Remarks : N/A</div>
 
             {/* Performance Metrics */}
-            <div className="mt-8 flex flex-wrap ml-13 max-md:20 gap-x-4 gap-y-8 justify-items-center">
+            <div className="mt-8 flex flex-wrap ml-13 md:ml-37 gap-x-4 gap-y-8 justify-items-center">
               <ProgressCircle label="Attendance" value={95} size={80} />
               <ProgressCircle label="Tools" value={95} size={80} />
               <ProgressCircle label="Communication" value={90} size={105} />
